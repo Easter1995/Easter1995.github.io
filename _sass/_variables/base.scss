@@ -80,8 +80,9 @@ $font-family-posts        : if(get_font_family('posts'), (get_font_family('posts
 
 $font-family-monospace    : consolas, Menlo, $font-family-chinese, monospace;
 $font-family-monospace    : if(get_font_family('codes'), (get_font_family('codes'), consolas, Menlo, $font-family-chinese, monospace), $font-family-monospace);
-
-$font-family-icons        : 'FontAwesome';
+// change my icon family to my pro font
+$font-family-icons        : "Font Awesome 6 Pro";
+// $font-family-icons        : 'FontAwesome';
 
 
 // Font Weight

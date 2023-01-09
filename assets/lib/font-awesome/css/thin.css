@@ -11,9 +11,10 @@
   font-style: normal;
   font-weight: 100;
   font-display: block;
-  src: url("../webfonts/fa-thin-100.woff2") format("woff2"), url("../webfonts/fa-thin-100.ttf") format("truetype"); }
+  src: url("../fonts/fa-thin-100.woff2") format("woff2"), url("../fonts/fa-thin-100.ttf") format("truetype"); }
 
+/* 这里不区分出thin，我把它删掉了，这样好改 */
 .fat,
-.fa-thin {
+.fa {
   font-family: 'Font Awesome 6 Pro';
   font-weight: 100; }
