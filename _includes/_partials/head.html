@@ -60,30 +60,41 @@
 {% endif %}
 
 {% include _partials/head/external-fonts.html %}
+{%- comment -%} change the old way of adding my own font {%- endcomment -%}
+{% assign font_awesome_uri = site.vendors._internal | append: '/font-awesome/css/fontawesome.css' | relative_url %}
+{% assign font_awesome_theme_uri = site.vendors._internal | append: '/font-awesome/css/thin.min.css' | relative_url %}
+{% assign font_awesome_themeBrands_uri = site.vendors._internal | append: '/font-awesome/css/brands.min.css' | relative_url %}
 
-{% assign font_awesome_uri = site.vendors._internal | append: '/font-awesome/css/font-awesome.min.css?v=4.6.2' | relative_url %}
 {% if site.vendors.fontawesome %}
   {% assign font_awesome_uri = site.vendors.fontawesome %}
 {% endif %}
+{%- comment -%} adding them into head link {%- endcomment -%}
 <link href="{{ font_awesome_uri }}" rel="stylesheet" type="text/css" />
+<link href="{{ font_awesome_theme_uri }}" rel="stylesheet" type="text/css" />
+<link href="{{ font_awesome_themeBrands_uri }}" rel="stylesheet" type="text/css" />
+
 
 <link href="{{ site.css | relative_url }}/main.css?v={{ site.version }}" rel="stylesheet" type="text/css" />
 
-{% if page.keywords %}
+{%- comment -%} 现在搜索引擎已经会忽视掉关键字了 这一段没必要 {%- endcomment -%}
+
+{%- comment -%} {% if page.keywords %}
   <meta name="keywords" content="{{ page.keywords }}" />
 {% elsif page.tags and page.tags | size != 0 %}
   <meta name="keywords" content="{% for tag in page.tags %}{{ tag }},{% endfor %}" />
 {% elsif site.keywords %}
   <meta name="keywords" content="{{ site.keywords }}" />
-{% endif %}
+{% endif %} {%- endcomment -%}
 
-{% assign site_rss = site.rss %}
+{%- comment -%} 没有什么意义，现在已经用不着rss订阅了 {%- endcomment -%}
+
+{%- comment -%} {% assign site_rss = site.rss %}
 {% if site.feed and site.feed.path and site.rss == '' or site.rss == nil %}
   {% assign site_rss = site.feed.path %}
 {% endif %}
 {% if site_rss %}
   <link rel="alternate" href="{{ site_rss | relative_url }}" title="{{ site.title }}" type="application/atom+xml" />
-{% endif %}
+{% endif %} {%- endcomment -%}
 
 
 {% if site.favicon %}

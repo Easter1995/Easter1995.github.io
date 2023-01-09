@@ -79,7 +79,9 @@
 
         </nav>
 
-        {% assign site_rss = site.rss %}
+{%- comment -%} 删除了展示rss的部分，已经过时了 {%- endcomment -%}
+
+        {%- comment -%} {% assign site_rss = site.rss %}
         {% if site.feed and site.feed.path and site.rss == '' or site.rss == nil %}
           {% assign site_rss = site.feed.path %}
         {% endif %}
@@ -90,7 +92,7 @@
               RSS
             </a>
           </div>
-        {% endif %}
+        {% endif %} {%- endcomment -%}
 
         <div class="links-of-author motion-element">
           {% if site.social %}

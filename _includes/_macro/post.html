@@ -74,7 +74,7 @@
           {%- comment -%}如果 在config里面开启了创建时间显示 {%- endcomment -%}
             {% if site.post_meta.created_at %}
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="fa fa-calendar"></i>
               </span>
               {% if site.post_meta.item_text %}
                 <span class="post-meta-item-text">{{ __.post.posted }}</span>
@@ -107,7 +107,12 @@
               <span class="post-meta-divider">|</span>
             {% endif %}
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+              {%- comment -%} 对于categories不同加入两种不同的folder图片 {%- endcomment -%}
+              {%if post.categories.size > 1%}
+                <i class="fa fa-folders"></i>
+              {% else %}
+                <i class="fa fa-folder"></i>
+              {% endif %}
               </span>
               {% if site.post_meta.item_text %}
                 <span class="post-meta-item-text">{{ __.post.in }}</span>
