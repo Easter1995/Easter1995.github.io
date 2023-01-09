@@ -27,9 +27,12 @@
       <header class="post-header">
 
         {% comment %} % Not to show title for quote posts that do not have a title {% endcomment %}
+        {%- comment -%} 如果不是index首页就直接进入，对于是index首页的情况也是只有post.type是quote，post.title是空才会退出不进入 {%- endcomment -%}
         {% unless is_index and post.type == 'quote' and post.title == nil %}
+        {%- comment -%} 如果选用了seo就会使用二级标题，否则为一级标题 （优化搜索引擎） {%- endcomment -%}
           <{% if site.seo %}h2{% else %}h1{% endif %} class="post-title" itemprop="name headline">
           {% comment %} Link posts {% endcomment %}
+          {%- comment -%} 如果post的front matter里有link元素才会进入 {%- endcomment -%}
           {% if post.link %}
               {% if post.sticky > 0 %}
                 {{ post.sticky }}
@@ -41,23 +44,34 @@
                 {% if post.title %}{{ post.title }}{% else %}{{  post.link }}{% endif %}
                 <i class="fa fa-external-link"></i>
               </a>
+            {%- comment -%} 对于post内没有link元素的情况 {%- endcomment -%}
             {% else %}
+            {%- comment -%} 如果是首页 {%- endcomment -%}
             {% if is_index %}
+            {%- comment -%} 如果首页的内容显示的此文章（由for loop而来）中有置顶（sticky）元素 {%- endcomment -%}
+
                 {% if post.sticky > 0 %}
                   <span class="post-sticky-flag" title="{{ __.post.sticky }}">
                     <i class="fa fa-thumb-tack"></i>
                   </span>
                 {% endif %}
+                {%- comment -%} 对于非置顶元素的显示链接 {%- endcomment -%}
                 <a class="post-title-link" href="{{ post.url | relative_url }}" itemprop="url">
+                {%- comment -%} 链接名称是post标题，如果没有title，选取设定的_data/language中的post.untitled内容 {%- endcomment -%}
                 {{ post.title | default: __.post.untitled }}
               </a>
+              {%- comment -%} 如果是非首页index内容，则只会进行标题显示 {%- endcomment -%}
             {% else %}{{ post.title }}{% endif %}
+
           {% endif %}
+        {%- comment -%} 如果选用了seo就会使用二级标题，否则为一级标题 （优化搜索引擎） {%- endcomment -%}
         </{% if site.seo %}h2{% else %}h1{% endif %}>
         {% endunless %}
 
+{%- comment -%} 此部分是关于首页文章的post元数据如发布时间，类别（categories） {%- endcomment -%}
         <div class="post-meta">
           <span class="post-time">
+          {%- comment -%}如果 在config里面开启了创建时间显示 {%- endcomment -%}
             {% if site.post_meta.created_at %}
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>

@@ -3,25 +3,25 @@
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
 }
-
+// 文档最大宽度小于767说明是手机
 @mixin mobile() {
   @media (max-width: 767px) {
     @content;
   }
 }
-
+// 文档大小在769px到991px说明是平板
 @mixin tablet() {
   @media (min-width: 768px) and (max-width: 991px) {
     @content;
   }
 }
-
+// 文档最小992px且小于1599说明是小电脑屏幕
 @mixin desktop() {
-  @media (min-width: 992px) {
+  @media (min-width: 992px) and (max-width: 1599px) {
     @content;
   }
 }
-
+// 文档最小为1600px说明是大电脑屏幕
 @mixin desktop-large() {
   @media (min-width: 1600px) {
     @content;
