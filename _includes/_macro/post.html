@@ -71,11 +71,14 @@
 {%- comment -%} 此部分是关于首页文章的post元数据如发布时间，类别（categories） {%- endcomment -%}
         <div class="post-meta">
           <span class="post-time">
+
           {%- comment -%}如果 在config里面开启了创建时间显示 {%- endcomment -%}
             {% if site.post_meta.created_at %}
+            {%- comment -%} 显示calendar图标 {%- endcomment -%}
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar"></i>
               </span>
+              {%- comment -%} 组件文字提示符号显示 {%- endcomment -%}
               {% if site.post_meta.item_text %}
                 <span class="post-meta-item-text">{{ __.post.posted }}</span>
               {% endif %}
@@ -84,13 +87,15 @@
               </time>
             {% endif %}
 
+          {%- comment -%} 保证用户开启了显示updated更改时间选项 且 在文章front matter里面写入了updated时显示 {%- endcomment -%}
             {% if site.post_meta.created_at and site.post_meta.updated_at and post.updated %}
               <span class="post-meta-divider">|</span>
             {% endif %}
 
+          {%- comment -%} 保证用户开启了显示updated更改时间选项 且 在文章front matter里面写入了updated时显示 {%- endcomment -%}
             {% if site.post_meta.updated_at and post.updated %}
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
+                <i class="fa fa-calendar-check"></i>
               </span>
               {% if site.post_meta.item_text %}
                 <span class="post-meta-item-text">{{ __.post.modified }}</span>
@@ -101,8 +106,11 @@
             {% endif %}
           </span>
 
+        {%- comment -%} 如果文章写了分类属性(FM),并且config中开启了显示分类元数据 {%- endcomment -%}
           {% if post.categories and post.categories.size > 0 and site.post_meta.categories %}
+
             <span class="post-category" >
+            {%- comment -%} 只要它前面是开了一个属性的 {%- endcomment -%}
             {% if site.post_meta.created_at or site.post_meta.updated_at %}
               <span class="post-meta-divider">|</span>
             {% endif %}
@@ -114,17 +122,20 @@
                 <i class="fa fa-folder"></i>
               {% endif %}
               </span>
+
               {% if site.post_meta.item_text %}
                 <span class="post-meta-item-text">{{ __.post.in }}</span>
               {% endif %}
+
               {% for cat in post.categories %}
+              {%- comment -%} 把类别编码为url形式，对于+代指空格部分换成%20 {%- endcomment -%}
                 {% assign cat_url_encode = cat | url_encode | replace: '+', '%20' %}
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="{{ '/category/#/' | relative_url | append: cat_url_encode }}" itemprop="url" rel="index">
                     <span itemprop="name">{{ cat }}</span>
                   </a>
                 </span>
-
+              {%- comment -%} 加上逗号部分 {%- endcomment -%}
                 {% assign cat_length = post.categories.size %}
                 {% if cat_length > 1 and forloop.index != cat_length %}
                   {{ __.symbol.comma }}
@@ -132,8 +143,9 @@
               {% endfor %}
             </span>
           {% endif %}
-
+        {%- comment -%} 如果文章是打开了comments（评论功能） {%- endcomment -%}
           {% if post.comments %}
+
             {% if site.duoshuo_shortname or site.duoshuo and site.duoshuo.shortname %}
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
@@ -144,6 +156,7 @@
                   <span class="post-comments-count ds-thread-count" data-thread-key="{{ post.url }}" itemprop="commentCount"></span>
                 </a>
               </span>
+
             {% elsif site.facebook_comments_plugin.enable %}
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
@@ -158,7 +171,7 @@
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
+                  <i class="fa fa-comment"></i>
                 </span>
                 <a href="{{ post.url | relative_url }}#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
@@ -203,6 +216,7 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-comment-o"></i>
               </span>
+            {%- comment -%} 如果此文章用的layout是post的话 {%- endcomment -%}
               {% if post.layout == 'post' %}
                 <a href="{{ post.url | relative_url }}#SOHUCS" itemprop="discussionUrl">
                   <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="{{ post.url }}" itemprop="commentsCount"></span>
@@ -216,6 +230,7 @@
           {% endif %}
 
           {% comment %} LeanCould PageView {% endcomment %}
+          {%- comment -%} 这里调用第三方服务来实现统计点击数 {%- endcomment -%}
           {% if site.leancloud_visitors.enable %}
              <span id="{{ post.url | relative_url }}" class="leancloud_visitors" data-flag-title="{{ post.title }}">
                <span class="post-meta-divider">|</span>
@@ -228,10 +243,11 @@
                  <span class="leancloud-visitors-count"></span>
              </span>
           {% endif %}
-
-          {% if site.busuanzi_count.enable and site.busuanzi_count.page_pv and is_index == false or is_index == nil%}
+        {%- comment -%} 不算子来统计，这里看来and or应该是左结合的顺序执行 {%- endcomment -%}
+        {%- comment -%} 此信息只会显示到文章页,and or 是左结合，非首页，以点击量统计 带有选择图标fa {%- endcomment -%}
+          {% if site.busuanzi_count.enable and site.busuanzi_count.page_pv and is_index == false or is_index == nil %}
             <span class="post-meta-divider">|</span>
-            <span class="page-pv">{{ site.busuanzi_count.page_pv_header }}
+            <span class="page-pv" id="busuanzi_container_page_pv" style='display:none'>{{ site.busuanzi_count.page_pv_header }}
             <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>{{ site.busuanzi_count.page_pv_footer }}
             </span>
           {% endif %}

@@ -17,4 +17,6 @@
 .fat,
 .fa {
   font-family: 'Font Awesome 6 Pro';
-  font-weight: 100; }
+  font-weight: 100;
+  color: #ea4764;
+}
