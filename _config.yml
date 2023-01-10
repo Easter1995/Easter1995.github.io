@@ -10,7 +10,8 @@ description: test
 author: John Doe
 # Support language: de, en, fr-FR, id, ja, ko, pt-BR, pt, ru, zh-Hans, zh-hk, zh-tw
 language: en
-date_format: '%Y-%m-%d'
+# 日期显示格式 年(四位)-月份（01-12）-月内中的一天（0-31）-星期（0-6）（星期天为星期的开始）
+date_format: '%Y-%m-%d %a'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com' and baseurl as '/child'
@@ -311,7 +312,7 @@ auto_excerpt:
 post_meta:
   item_text: true
   created_at: true
-  updated_at: false
+  updated_at: true
   categories: true
 
 # Post wordcount display settings
@@ -531,19 +532,22 @@ leancloud_visitors:
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/
 busuanzi_count:
   # count values only if the other configs are false
-  enable: false
+  enable: true
   # custom uv span for the whole site
   site_uv: true
-  site_uv_header: <i class="fa fa-user"></i>
-  site_uv_footer:
+  site_uv_header: <i class="fa fa-user"></i>你是clovy第
+  site_uv_footer: 个小伙伴
   # custom pv span for the whole site
   site_pv: true
-  site_pv_header: <i class="fa fa-eye"></i>
-  site_pv_footer:
+  site_pv_header: <i class="fa fa-eye"></i>被偷偷看了
+  site_pv_footer: 次,好刺激!
   # custom pv span for one page only
   page_pv: true
-  page_pv_header: <i class="fa fa-file-o"></i>
-  page_pv_footer:
+  page_pv_header: <i class="fa fa-spinner fa-spin"></i>
+  page_pv_footer: Hits
+  # adding busuanzi counter off-set to self delete or add some click
+  site_uv_offset: -27631936
+  site_pv_offset: -50093088
 
 
 # Tencent analytics ID

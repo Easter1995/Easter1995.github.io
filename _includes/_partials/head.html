@@ -12,7 +12,7 @@
     {% if site.vendors.pace_css %}
       {% assign pace_css_uri = site.vendors.pace_css %}
     {% endif %}
-  <script src="{{ pace_js_uri }}"></script>
+  <script async src="{{ pace_js_uri }}"></script>
   <link href="{{ pace_css_uri }}" rel="stylesheet">
 {% endif %}
 
@@ -116,7 +116,7 @@
 {{ open_graph }}
 
 {% comment %} Export some HEXO Configurations to Front-End {% endcomment %}
-<script type="text/javascript" id="hexo.configurations">
+<script async type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '{{ site.baseurl }}',
