@@ -1,7 +1,11 @@
+  <!-- add post.lineno post.excerpt -->
 {% if site.highlight.line_number %}
   {% assign source = post.excerpt %}
   {% include _helper/lineno.html %}
+  <!-- add post.lineno -->
   {{ lineno }}
 {% else %}
+  <!-- add post.excerpt -->
   {{ post.excerpt }}
+  <!-- add post.excerpt -->
 {% endif %}
