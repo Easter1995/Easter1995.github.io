@@ -1,8 +1,8 @@
 .posts-expand .post-meta {
-  margin: 3px 0 60px 0;
-  color: $grey-dark;
+  margin: 0 0 1em 0;
+  color: rgb(214, 114, 114);
   font-family: $font-family-posts;
-  font-size: 12px;
+  font-size: 1em;
   text-align: center;
 
   .post-category-list {
@@ -13,7 +13,7 @@
   .post-category-list-link { color: $grey-dark; }
 
   .post-description {
-    font-size: 14px;
+    font-size: 1em;
     margin-top: 2px;
   }
 }
