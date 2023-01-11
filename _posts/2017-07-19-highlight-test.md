@@ -21,9 +21,11 @@ alert('Hello World!');
 alert( 'Hello, world!' );
 ```
 
-```python
+~~~python
 print 'helloworld'
-```
+print 'helloworld'
+print 'helloworld'
+~~~
 
 ```ruby
 def foo

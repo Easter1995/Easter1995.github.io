@@ -13,7 +13,7 @@
 
 {% assign no_english_source = no_english_source | remove: ' ' | remove: '"' | remove: '.' | remove: ',' %}
 {% assign no_english_source = no_english_source | remove: '?' | remove: ':' | remove: ';' | remove: "'" %}
-{% assign no_english_source = no_english_source | remove: '<' | remove: '>' | remove: '[' | remove: '']' %}
+{% assign no_english_source = no_english_source | remove: '<' | remove: '>' | remove: '[' | remove: ']' %}
 {% assign no_english_source = no_english_source | remove: '{' | remove: '}' | remove: '\' | remove: '/' %}
 {% assign no_english_source = no_english_source | remove: '(' | remove: ')' | remove: '!' | remove: '-' %}
 
