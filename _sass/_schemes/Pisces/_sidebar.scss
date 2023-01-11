@@ -4,7 +4,6 @@
   display: none;
   right: auto;
   bottom: auto;
-
   // Do NOT delete this line
   // or Affix (position: fixed) will not work in Google Chrome.
   -webkit-transform: none;
@@ -16,7 +15,7 @@
   width: 240px;
   color: $text-color;
   background: white;
-  box-shadow: $box-shadow;
+  box-shadow: $box-shadow-inner;
   border-radius: $border-radius;
 
   &.affix {
