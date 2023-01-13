@@ -76,7 +76,7 @@ $highlight_theme : jekyll-config("highlight_theme");
     bg-color: scale-color($highlight-background, $lightness: -60%)
   ) !global;
 }
-
+//  $highlight_theme == "night bright" or write wrong
 @if $highlight_theme == "night bright" {
   $highlight-background   : #000000 !global;
   $highlight-current-line : #2a2a2a !global;
