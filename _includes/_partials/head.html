@@ -2,6 +2,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
+{%- comment -%} 加入自定义高亮 {%- endcomment -%}
+{% unless site.highlight_old %}   
+  {% if post.syntax %}
+    <link rel="stylesheet" href="/assets/lib/highlight_box/syntax.{{post.syntax}}.css" >
+  <!-- 加入文章样式 -->
+  {% else if site.highlight_theme %}
+    <link rel="stylesheet" href="/assets/lib/highlight_box/syntax.{{site.highlight_theme}}.css" >
+  <!-- 加入网站指定 -->
+  {% endif %}
+{% endunless %}
 
 {% if site.pace %}
   {% assign pace_css_uri = site.vendors._internal | append: '/pace/'| append: site.pace_theme | append: '.min.css?v=1.0.2' | relative_url %}

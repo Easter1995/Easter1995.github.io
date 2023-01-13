@@ -1,4 +1,9 @@
 @import "highlight/highlight";
+
+@if jekyll-config('highlight_old') {
+  @include partial_highlight;
+}
+
 @import "tags/tags";
 
 @import "buttons";

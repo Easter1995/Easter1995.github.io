@@ -16,6 +16,11 @@ $jekyll-config-map : {{ config_map }};
   @return map-get($jekyll-config-map, $key);
 }
 
+// //old highlighting
+// {% if site.highlight_old %}
+// @import "_common/components/highlight/highlight";
+// {% endif %}
+
 // Variables Layer
 // --------------------------------------------------
 @import "_variables/base";

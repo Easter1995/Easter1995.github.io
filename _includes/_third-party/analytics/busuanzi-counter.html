@@ -34,17 +34,17 @@
             var countOffset_siteUv = {{site.busuanzi_count.site_uv_offset}};  
             var countoffset_pagePv = {{page.offset | default: 0}}  ;
       function fixCount() {
-        if (document.getElementById('busuanzi_container_site_uv').ownerDocument.defaultView.getComputedStyle(document.getElementById('busuanzi_container_site_uv'), null).display === 'inline') {
+        if ( document.getElementById('busuanzi_container_site_uv') && document.getElementById('busuanzi_container_site_uv').ownerDocument.defaultView.getComputedStyle(document.getElementById('busuanzi_container_site_uv'), null).display === 'inline') {
         clearInterval(int);
         $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset_siteUv);
     }
-        if (document.getElementById('busuanzi_container_site_pv').ownerDocument.defaultView.getComputedStyle(document.getElementById('busuanzi_container_site_pv'), null).display === 'inline') {
+        if ( document.getElementById('busuanzi_container_site_pv') && document.getElementById('busuanzi_container_site_pv').ownerDocument.defaultView.getComputedStyle(document.getElementById('busuanzi_container_site_pv'), null).display === 'inline') {
         clearInterval(int);
         $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset_sitePv);
     }
          {%- comment -%} 如果文章页自己定义了offset的话会进行改变 {%- endcomment -%}
         {% if page.offset != 0 %}
-          if (document.getElementById('busuanzi_container_page_pv').ownerDocument.defaultView.getComputedStyle(document.getElementById('busuanzi_container_page_pv'), null).display === 'inline') {
+          if ( document.getElementById('busuanzi_container_page_pv') && document.getElementById('busuanzi_container_page_pv').ownerDocument.defaultView.getComputedStyle(document.getElementById('busuanzi_container_page_pv'), null).display === 'inline') {
         clearInterval(int);
         $("#busuanzi_value_page_pv").html(parseInt($("#busuanzi_value_page_pv").html()) + countoffset_pagePv);
         {% endif %}

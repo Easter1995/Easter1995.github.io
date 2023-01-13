@@ -41,8 +41,9 @@ excerpt_separator: <!-- more -->
 # Code Highlighter
 ## 'pygments' is unsupported on GitHub Pages now.
 highlighter: rouge
+# 对高亮部分显示行号
 highlight:
-  line_number: false
+  line_number: true
 
 
 
@@ -51,6 +52,7 @@ highlight:
 markdown: kramdown
 kramdown:
     input: GFM
+    syntax_highlighter: rouge
 
 # Default Attributes
 ## Docs: https://jekyllrb.com/docs/configuration/#front-matter-defaults
@@ -203,7 +205,7 @@ font:
   codes:
     external: true
     family:
-    size:
+    size: 13
 
 
 
@@ -298,6 +300,7 @@ sidebar:
 # ---------------------------------------------------------------
 
 # Automatically scroll page to section which is under <!-- more --> mark.
+# 没用，暂时不知道怎么实现
 scroll_to_more: true
 
 # Automatically saving scroll position on each post/page in cookies.
@@ -353,10 +356,16 @@ custom_logo:
 
 # Code Highlight theme
 # Available value:
-#    normal | night | night eighties | night blue | night bright
+# highlight 加上   normal | night | night eighties | night blue | night bright
+# base16, base16.dark, base16.light, base16.monokai, base16.monokai.dark,
+#  base16.monokai.light, base16.solarized, base16.solarized.dark,
+#  base16.solarized.light, bw, colorful, github, gruvbox, gruvbox.dark,
+# gruvbox.light, igorpro, magritte, molokai, monokai, monokai.sublime, 
+# pastie, thankful_eyes, tulip
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
-
+highlight_theme: thankful_eyes
+# 是否使用原来模板的主题
+highlight_old: false
 
 # ---------------------------------------------------------------
 # Third Party Services Settings
@@ -487,14 +496,14 @@ duoshuo_info:
   #admin_nickname: Author
 
 
-# Facebook SDK Support.
-# https://github.com/iissnan/hexo-theme-next/pull/410
-facebook_sdk:
-  enable: false
-  app_id:       #<app_id>
-  fb_admin:     #<user_id>
-  like_button:  #true
-  webmaster:    #true
+# # Facebook SDK Support.
+# # https://github.com/iissnan/hexo-theme-next/pull/410
+# facebook_sdk:
+#   enable: false
+#   app_id:       #<app_id>
+#   fb_admin:     #<user_id>
+#   like_button:  #true
+#   webmaster:    #true
 
 # Facebook comments plugin
 # This plugin depends on Facebook SDK.
@@ -505,14 +514,14 @@ facebook_comments_plugin:
   width: 100%       # default width is 550px
   scheme: light     # default scheme is light (light or dark)
 
-# VKontakte API Support.
-# To get your AppID visit https://vk.com/editapp?act=create
-vkontakte_api:
-  enable: false
-  app_id:       #<app_id>
-  like:         true
-  comments:     true
-  num_of_posts: 10
+# # VKontakte API Support.
+# # To get your AppID visit https://vk.com/editapp?act=create
+# vkontakte_api:
+#   enable: false
+#   app_id:       #<app_id>
+#   like:         true
+#   comments:     true
+#   num_of_posts: 10
 
 # Star rating support to each article.
 # To get your ID visit https://widgetpack.com
