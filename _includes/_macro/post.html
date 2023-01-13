@@ -6,7 +6,7 @@
 
   {% assign post_class = 'post post-type-' | append: post.type | default: 'normal' %}
   {% assign post_class = post_class | append: ' ' | append: post_extra_class | default: '' %}
-  {% if post.sticky > 0 %}
+  {% if post.sticky %}
     {% assign post_class = post_class | append: ' ' | append: 'post-sticky' %}
   {% endif %}
 
@@ -35,7 +35,7 @@
           {% comment %} Link posts {% endcomment %}
           {%- comment -%} 如果post的front matter里有link元素才会进入 {%- endcomment -%}
           {% if post.link %}
-              {% if post.sticky > 0 %}
+              {% if post.sticky %}
                 {{ post.sticky }}
                 <span class="post-sticky-flag" title="{{ __.post.sticky }}">
                   <i class="fa fa-thumb-tack"></i>
@@ -51,9 +51,9 @@
             {% if is_index %}
             {%- comment -%} 如果首页的内容显示的此文章（由for loop而来）中有置顶（sticky）元素 {%- endcomment -%}
 
-                {% if post.sticky > 0 %}
+                {% if post.sticky %}
                   <span class="post-sticky-flag" title="{{ __.post.sticky }}">
-                    <i class="fa fa-thumb-tack"></i>
+                    <i class="fa fa-thumbtack"></i>
                   </span>
                 {% endif %}
                 {%- comment -%} 对于非置顶元素的显示链接 {%- endcomment -%}
@@ -354,7 +354,7 @@
             {% else %}
                 <div class="post-button text-center">
                   <a class="btn" href="{{ post.url | relative_url }}{% if site.scroll_to_more %}#{{ __.post.more }}{% endif %}" rel="contents">
-                    {{post.title | truncate: 10, ""}}&ensp;<i class="fa fa-right-to-bracket"></i>
+                    {{post.title | truncate: 10, "..."}}&ensp;<i class="fa fa-right-to-bracket"></i>
                   </a>
                 </div>
             {% endif %}

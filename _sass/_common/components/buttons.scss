@@ -4,7 +4,7 @@
   font-size: $btn-default-font-size;
   color: $btn-default-color;
   background: $btn-default-bg;
-  border: $btn-default-border-width solid $btn-default-border-color;
+  border: $btn-default-border-width solid rgb(225, 165, 165);
   text-decoration: none;
   border-radius: $btn-default-radius;
   transition-property: background-color;
@@ -12,8 +12,8 @@
 
   @at-root %btn-hover{
     border-color: $btn-default-hover-border-color;
-    color: $btn-default-hover-color;
-    background: $btn-default-hover-bg;
+    color: white;
+    background: #e29e9e;
   }
 
   &:hover { @extend %btn-hover; }

@@ -3,16 +3,12 @@
 }
 
 .site-meta {
-  padding: 20px 0;
+  padding: 2rem 0;
   color: white;
-  background: $black-deep;
+  background: #e29e9e;
 
-  @include tablet() {
-    box-shadow: 0 0 16px rgba(0,0,0,0.5);
-  }
-  @include mobile() {
-    box-shadow: 0 0 16px rgba(0,0,0,0.5);
-  }
+  @include tablet(); 
+  @include mobile();
 }
 
 .brand {

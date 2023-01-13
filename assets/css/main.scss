@@ -2,7 +2,8 @@
 ---
 // CSS Style Guide: http://codeguide.co/#css
 
-
+{% assign background = site.background %}
+$site_background: "/assets/images/{{background}}";
 
 $scheme    : '{{ site.scheme | default: Muse }}';
 $variables : base $scheme custom;

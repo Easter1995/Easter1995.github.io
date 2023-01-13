@@ -4,10 +4,9 @@
   .btn {
     color: rgb(150, 78, 78);
     font-size: 0.9em;
-    background: $read-more-bg-color;
+    background: rgba(255, 255, 255, 0);
     border-radius: $read-more-border-radius;
-    line-height: 2;
-    margin: 0 4px 8px 4px;
+    line-height: 2.3;
   }
   .btn:hover {
     @extend %btn-hover;

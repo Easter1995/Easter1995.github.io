@@ -1,7 +1,7 @@
 
 ::selection {
-  background: $selection-bg;
-  color: $selection-color;
+  background: #e29e9e;
+  color: #fff4c8;
 }
 
 body {
@@ -10,7 +10,7 @@ body {
   font-size: $font-size-base;
   line-height: $line-height-base;
   color: #9c6969;
-  background-image: url(/assets/images/bg-i1.JPG);
+  background-image: url($site_background);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;

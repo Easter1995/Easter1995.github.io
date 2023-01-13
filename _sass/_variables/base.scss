@@ -35,7 +35,7 @@ $text-color                   : $black-light;
 
 // Global link color.
 $link-color                   : $black-light;
-$link-hover-color             : $black-deep;
+$link-hover-color             : #dc7147;
 $link-decoration-color        : $grey-light;
 $link-decoration-hover-color  : $black-deep;
 
@@ -162,11 +162,11 @@ $btn-default-radius             : 0;
 $btn-default-bg                 : $black-deep;
 $btn-default-color              : white;
 $btn-default-font-size          : 14px;
-$btn-default-border-width       : 2px;
+$btn-default-border-width       : 1px;
 $btn-default-border-color       : $black-deep;
-$btn-default-hover-bg           : white;
+$btn-default-hover-bg           : #e29e9e;
 $btn-default-hover-color        : $black-deep;
-$btn-default-hover-border-color : $black-deep;
+$btn-default-hover-border-color : #e29e9e;
 
 
 
@@ -210,8 +210,8 @@ $sidebar-marigin-left           : -5em;
 
 // Headband
 // --------------------------------------------------
-$headband-height                : 3px;
-$headband-bg                    : $black-deep;
+$headband-height                : 0.34em;
+$headband-bg                    : #2d314a;
 
 
 

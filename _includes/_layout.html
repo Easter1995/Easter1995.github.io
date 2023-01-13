@@ -32,7 +32,8 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div class="content-wrap">
+      {%- comment -%} 只把首页变透明 {%- endcomment -%}
+        <div class="{%if page.layout=='index'%}content-wrap-index{%else%}content-wrap{%endif%}">
           <div id="content" class="content">
             {{ content }}
           </div>

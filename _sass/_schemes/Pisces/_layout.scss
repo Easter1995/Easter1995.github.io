@@ -20,10 +20,12 @@
   background: white;
   box-shadow: $box-shadow-inner;
   border-radius: $border-radius-inner;
-  margin-left: $sidebar-marigin-left;
-
   @include desktop-large() {
     .container & { width: 240px; }
+    margin-left: $sidebar-marigin-left;
+  }
+  @include desktop() {
+    margin-left: $sidebar-marigin-left;
   }
   @include tablet() {
     position: relative;
@@ -64,6 +66,29 @@
   padding: $content-desktop-padding;
   width: $content-desktop;
   background: #ffffff;
+  min-height: 900px;
+  box-shadow: $box-shadow-inner;
+  border-radius: $border-radius-inner;
+
+  @include tablet() {
+    width: 100%;
+    padding: 20px;
+    border-radius: initial;
+  }
+  @include mobile() {
+    width: 100%;
+    padding: 20px;
+    min-height: auto;
+    border-radius: initial;
+  }
+}
+
+.content-wrap-index {
+  float: right;
+  box-sizing: border-box;
+  padding: $content-desktop-padding;
+  width: $content-desktop;
+  background: #ffffffcb;
   min-height: 900px;
   box-shadow: $box-shadow-inner;
   border-radius: $border-radius-inner;

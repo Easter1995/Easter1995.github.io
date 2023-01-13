@@ -59,7 +59,7 @@
 }
 
 .site-nav-toggle {
-  left: 20px;
+  left: 7em;
   top: 50%;
 
   -webkit-transform:  translateY(-50%);
@@ -67,5 +67,10 @@
 
   @include tablet() {
     display: block;
+  }
+
+  .fa {
+    font-size: x-large;
+    color: whitesmoke;
   }
 }

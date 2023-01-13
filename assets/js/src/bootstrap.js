@@ -16,6 +16,12 @@ $(document).ready(function () {
     var $siteNav = $('.site-nav');
     var ON_CLASS_NAME = 'site-nav-on';
     var isSiteNavOn = $siteNav.hasClass(ON_CLASS_NAME);
+    if(isSiteNavOn){
+      document.getElementById('mobile_index_button').className='fa fa-cat';
+    }
+    else{
+      document.getElementById('mobile_index_button').className='fa fa-cat-space';
+    }
     var animateAction = isSiteNavOn ? 'slideUp' : 'slideDown';
     var animateCallback = isSiteNavOn ? 'removeClass' : 'addClass';
 

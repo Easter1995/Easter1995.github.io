@@ -158,6 +158,18 @@ menu_icons:
 #scheme: Mist
 scheme: Pisces
 
+#--------------------------------------------------------------------------
+# CHOOSE YOUR BACKGROUND or UPLOAD YOUR BACKGROUND IMAGE TO /assets/images
+#--------------------------------------------------------------------------
+# Backgrounds
+# -------------firework:---------------------
+# background: bg-i1.jpg
+# ----------------sky:-----------------------
+background: bg-i2.JPG
+# ----------------lake:----------------------
+# background: bg-i3.JPG
+# ------------your background:---------------
+# your background file's name:     
 
 # ---------------------------------------------------------------
 # Font Settings
