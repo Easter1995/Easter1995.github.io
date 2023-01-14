@@ -15,9 +15,22 @@ html, body { height: 100%; }
 
 // Header Section
 // --------------------------------------------------
-.header-inner {
-  padding: 100px 0 70px;
-  width: $content-desktop;
+.header-inner { 
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    padding: 0;
+    background-color: white;
+
+  @include clearfix();
+
+  @include mobile() {
+    width: 100%;
+  }
+
+  @include tablet() {
+    width: 100%;
+  }
 
   @include desktop-large() {
     .container & { width: $content-desktop-large; }
@@ -26,25 +39,58 @@ html, body { height: 100%; }
 
 // Main Section
 // --------------------------------------------------
-.main { padding-bottom: $footer-height + $gap-between-main-and-footer; }
+.main {
+  @include desktop{
+    align-items: stretch;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: calc(100% - 160px);
+  }
+  @include desktop-large{
+    align-items: stretch;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 73%;
+  }
+  @include tablet() {
+    padding-bottom: 100px;
+  }
+  @include mobile() {
+    padding-bottom: 100px;
+  }
+}
+
 .main-inner {
   margin: 0 auto;
-  width: $content-desktop;
 
-  @include desktop-large() {
+  @include desktop() {
+    width: 70%;
+  }
+
+  @include desktop-large() { 
+    width: 75%;
     .container & { width: $content-desktop-large; }
   }
+
+  @include tablet() {
+    width: 100%;
+  }
+
+  @include mobile() {
+    width: 100%;
+  }
+
 }
 
 
 // Footer Section
 // --------------------------------------------------
 .footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
   width: 100%;
   min-height: $footer-height;
+  display: flex;
 }
 .footer-inner {
   box-sizing: border-box;

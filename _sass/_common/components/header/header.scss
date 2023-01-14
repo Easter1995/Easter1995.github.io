@@ -1,7 +1,19 @@
-.header { background: $head-bg; }
-
-.header-inner { position: relative; }
-
+.header { 
+    background: $head-bg; 
+    box-shadow: 1.5em 1.2em 2.3em #ffffffba;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    @include mobile(){width: 100%;}
+    @include tablet(){width: 100%;}
+    @include desktop-large(){
+        width: 250px;
+    }
+    @include desktop(){
+        width: 240px;
+    }
+}
 
 @import "headerband";
 @import "site-meta";

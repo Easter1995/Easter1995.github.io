@@ -6,7 +6,7 @@
 
   {% assign post_class = 'post post-type-' | append: post.type | default: 'normal' %}
   {% assign post_class = post_class | append: ' ' | append: post_extra_class | default: '' %}
-  {% if post.sticky %}
+  {% if post.sticky and is_index %}
     {% assign post_class = post_class | append: ' ' | append: 'post-sticky' %}
   {% endif %}
 

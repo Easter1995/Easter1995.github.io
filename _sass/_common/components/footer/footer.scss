@@ -5,7 +5,16 @@
   img { border: none; }
 }
 
-.footer-inner { text-align: center; }
+.footer-inner { 
+  width: 73%;
+  text-align: center;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+}
 
 .with-love {
   display: inline-block;
