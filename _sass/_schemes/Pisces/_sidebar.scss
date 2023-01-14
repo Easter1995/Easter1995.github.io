@@ -12,12 +12,13 @@
 
 .sidebar-inner {
   box-sizing: border-box;
-  width: 240px;
   color: $text-color;
   background: white;
   box-shadow: $box-shadow-inner;
   border-radius: $border-radius;
 
+  @include desktop-large() {width: 250px;}
+  @include desktop() {width: 240px;}
   &.affix {
     position: fixed;
     top: 32px;
