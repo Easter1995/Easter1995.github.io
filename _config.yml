@@ -4,10 +4,10 @@
 # ---------------------------------------------------------------
 
 # Site
-title: NexT
-subtitle:
-description: test
-author: John Doe
+title: Clovy
+subtitle: 模板
+description: kiss kiss
+author: liamy & cyh
 # Support language: de, en, fr-FR, id, ja, ko, pt-BR, pt, ru, zh-Hans, zh-hk, zh-tw
 language: en
 # 日期显示格式 年(四位)-月份（01-12）-月内中的一天（0-31）-星期（0-6）（星期天为星期的开始）
@@ -15,12 +15,12 @@ date_format: '%Y-%m-%d %a'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com' and baseurl as '/child'
-url:
+url: 
 baseurl:
 permalink: pretty
 
 # Pagination
-paginate: 5
+paginate: 10
 #paginate_path: "/page:num/"
 #archive:
   #paginate: 10
@@ -95,7 +95,7 @@ rss:
 #since: 2015
 
 # icon between year and author @Footer
-authoricon: heart
+authoricon: alien-8bit
 
 # Footer `powered-by` and `theme-info` copyright
 copyright: true
@@ -127,6 +127,8 @@ menu:
   about: /about/
   archives: /archives/
   tags: /tags/
+  travel: /travel/
+  friend link: /friends/
   #sitemap: /sitemap.xml
   #commonweal: /404.html
 
@@ -139,7 +141,7 @@ menu:
 menu_icons:
   enable: true
   #KeyMapsToMenuItemKey: NameOfTheIconFromFontAwesome
-  home: home
+  home: house-night
   about: user
   categories: th
   schedule: calendar
@@ -147,6 +149,8 @@ menu_icons:
   archives: archive
   sitemap: sitemap
   commonweal: heartbeat
+  travel: face-smile-hearts
+  friend link: raygun
 
 
 
@@ -612,7 +616,7 @@ algolia_search:
 
 # Local search
 local_search:
-  enable: false
+  enable: true
   # if auto, trigger search by changing input
   # if manual, trigger search by pressing enter key or search button
   trigger: auto
@@ -759,6 +763,14 @@ vendors:
 css: assets/css
 js: assets/js
 images: assets/images
+
+# Collection
+collections_dir: custom_collec
+# collections
+collections:
+  friends:
+    output: true
+    permalink: /friends/:title/
 
 # Theme version
 version: 5.1.1

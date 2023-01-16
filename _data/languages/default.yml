@@ -45,7 +45,14 @@ post:
       license_content: 'All articles in this blog are licensed under
         <a href="%s" rel="external nofollow" target="_blank">%s</a> unless stating additionally.'
 
+travel:
+  start: Start on
+  end: End on
+  des: Destination
 
+friends:
+  name: Name
+  link: Link
 
 page:
   totally: Totally

@@ -1,43 +1,53 @@
 {% comment %} _toc(class, list_number, include.source, include.level, include.number_prefix) {% endcomment %}
 {% capture _toc %}
-  {% if include.level <= 6 %}
-    {% assign tag_begin = '<h' | append: include.level %}
-    {% assign blocks = include.source | split: tag_begin | shift %}
+{%- comment -%} 如果是旅行的首页 侧边栏table of contents 变成地点 {%- endcomment -%}
+  {% if is_travel %}
+    {% for travel in site.posts %}
+      {% if travel.type == "travel" %}
+      <a href="{{travel.url | relative_url}}" name='travel'>{{ travel.destination }}</a>
+      {% endif %}
+    {% endfor %}
 
-    {% if blocks.size == 0 %}
-      {% assign level = include.level | plus: 1 %}
-      {% include _helper/_toc.html source=include.source level=level number_prefix=include.number_prefix %}
-      {{ _toc }}
-    {% else %}
-      {% for block in blocks %}
-        {% assign tag_end = '</h' | append: include.level | append: '>'%}
-        {% assign tmp = block | split: tag_end %}
-        {% assign source = tmp[1] | strip %}
+  {% else %}
+    {% if include.level <= 6 %}
+      {% assign tag_begin = '<h' | append: include.level %}
+      {% assign blocks = include.source | split: tag_begin | shift %}
 
-        {% assign tmp = tmp[0] | strip | split: '>' %}
-        {% assign toc_title = tmp | shift | join: '>' | strip_html %}
+      {% if blocks.size == 0 %}
+        {% assign level = include.level | plus: 1 %}
+        {% include _helper/_toc.html source=include.source level=level number_prefix=include.number_prefix %}
+        {{ _toc }}
+      {% else %}
+        {% for block in blocks %}
+          {% assign tag_end = '</h' | append: include.level | append: '>'%}
+          {% assign tmp = block | split: tag_end %}
+          {% assign source = tmp[1] | strip %}
 
-        {% assign tmp = tmp[0] | strip | split: 'id=' %}
-        {% assign id = tmp[1] | strip | replace: '"', '' %}
+          {% assign tmp = tmp[0] | strip | split: '>' %}
+          {% assign toc_title = tmp | shift | join: '>' | strip_html %}
 
-        <li class="{{ class }}-item {{ class }}-level-{{ include.level }}">
-          <a class="{{ class }}-link" href="#{{ id }}">
-            {% if list_number %}
-              <span class="{{ class }}-number">{{ include.number_prefix }}{{ forloop.index }}</span>
+          {% assign tmp = tmp[0] | strip | split: 'id=' %}
+          {% assign id = tmp[1] | strip | replace: '"', '' %}
+
+          <li class="{{ class }}-item {{ class }}-level-{{ include.level }}">
+            <a class="{{ class }}-link" href="#{{ id }}">
+              {% if list_number %}
+                <span class="{{ class }}-number">{{ include.number_prefix }}{{ forloop.index }}</span>
+              {% endif %}
+              <span class="{{ class }}-text">{{ toc_title }}</span>
+            </a>
+
+            {% capture number_prefix %}{{ include.number_prefix }}{{ forloop.index }}.{% endcapture %}
+            {% assign level = include.level | plus: 1 %}
+            {% include _helper/_toc.html source=source level=level number_prefix=number_prefix %}
+            {% if _toc.size != 0 %}
+              <ol class="{{ class }}-child">
+                {{ _toc }}
+              </ol>
             {% endif %}
-            <span class="{{ class }}-text">{{ toc_title }}</span>
-          </a>
-
-          {% capture number_prefix %}{{ include.number_prefix }}{{ forloop.index }}.{% endcapture %}
-          {% assign level = include.level | plus: 1 %}
-          {% include _helper/_toc.html source=source level=level number_prefix=number_prefix %}
-          {% if _toc.size != 0 %}
-            <ol class="{{ class }}-child">
-              {{ _toc }}
-            </ol>
-          {% endif %}
-        </li>
-      {% endfor %}
+          </li>
+        {% endfor %}
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endcapture %}

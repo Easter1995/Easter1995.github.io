@@ -1,0 +1,31 @@
+---
+layout: layout
+---
+
+{% assign __ = site.data.languages[site.language] %}
+
+{%- comment -%} 其他人的链接 {%- endcomment -%}
+<section id="links" class="friend-link">
+<ul>
+    {% for friend in site.friends %}
+    
+        <li>
+            {%- comment -%} 姓名 {%- endcomment -%}
+            <h1> {{ friend.name }}: </h1> </ br>
+            {%- comment -%} 链接 {%- endcomment -%}
+            <ul class="friend-links">
+                {% for link in friend.links %}
+                <li>
+                    <span class="friend-link-type">
+                        {{ link[0] }}:
+                    </span>
+                    <span class="friend-link-url">
+                        <a href="{{ link[1] }}" alt="{{ link[0] }}">{{ link[1] }}</a>
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+</section>

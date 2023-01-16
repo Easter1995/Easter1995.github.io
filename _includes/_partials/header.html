@@ -51,6 +51,8 @@
         </li>
       {% endfor %}
 
+      
+
       {% if hasSearch %}
         <li class="menu-item menu-item-search">
           {% if site.swiftype_key %}
@@ -75,4 +77,6 @@
   {% endif %}
 </nav>
 
-{% include _custom/header.html %}
+{%- comment -%} 加入自定义的collection部分 {%- endcomment -%}
+      {% include _custom/header.html %}
+{%- comment -%}  {%- endcomment -%}

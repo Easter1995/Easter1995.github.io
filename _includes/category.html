@@ -10,7 +10,9 @@
   {% assign paginate_path = site.category.paginate_path | default: site.paginate_path  %}
 
   {% for cat_posts in site.categories %}
+    {%- comment -%} category的名字 {%- endcomment -%}
     {% assign cat = cat_posts[0] | url_encode | replace: '+', '%20' %}
+    {%- comment -%} 这个名字对应的文章们 {%- endcomment -%}
     {% assign posts = cat_posts[1] %}
 
     {% for post in posts %}

@@ -11,13 +11,13 @@
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
 
-      {% if is_post and site.toc.enable %}
+      {% if site.toc.enable and is_travel or is_post  %}
         {% assign display_toc = true %}
         {% assign source = page.content %}
         {% include _helper/toc.html %}
       {% endif %}
 
-      {% if display_toc and toc.size > 1 %}
+      {% if display_toc %}
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             {{ __.sidebar.toc }}
@@ -51,7 +51,7 @@
             </div>
           {% endif %}
 
-          {% if site.categories.size > 0 %}
+          {% if site.categories.size >= 0 %}
             {% assign categoriesPageQuery = site.pages | where_exp: 'page', 'page.type == "categories"' %}
             {% if categoriesPageQuery.size > 0 %}
               {% assign hasCategoriesPage = true %}
@@ -64,7 +64,7 @@
             </div>
           {% endif %}
 
-          {% if site.tags.size > 0 %}
+          {% if site.tags.size >= 0 %}
             {% assign tagsPageQuery = site.pages | where_exp: 'page', 'page.type == "tags"' %}
             {% if tagsPageQuery.size > 0 %}
               {% assign hasTagsPage = true %}
@@ -147,7 +147,6 @@
       <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
-
             {% if page.toc_number == nil %}
               {% assign list_number = site.toc.number %}
             {% else %}
@@ -162,7 +161,6 @@
             {% else %}
               <div class="post-toc-content">{{ toc }}</div>
             {% endif %}
-
           </div>
         </section>
       <!--/noindex-->

@@ -3,20 +3,22 @@
   {% assign end_size = 1 %}
   {% assign mid_size = 1 %}
   {% assign current =  paginator.page %}
+  {%- comment -%} 设置当前页数按钮额外的属性 {%- endcomment -%}
   {% capture current_page %}
     <span class="page-number current">{{ current }}</span>
   {% endcapture %}
+  {%- comment -%} 如果之前有页面的话 {%- endcomment -%}
   {% if paginator.previous_page %}
     <a class="extend prev" rel="prev" href="{{ paginator.previous_page_path | relative_url }}">{{ prev_text }}</a>
   {% endif %}
-
+  {%- comment -%} 得到总共的页数 {%- endcomment -%}
   {% assign total = paginator.total_pages %}
 
   {% assign left_end = end_size %}
   {% assign right_end = total | minus: end_size | plus: 1 %}
   {% assign left_mid = current | minus: mid_size %}
   {% assign right_mid = current | plus: mid_size %}
-
+  {%- comment -%} 左边边界挨到当前页 {%- endcomment -%}
   {% if left_end >= current %}{% assign left_end = current | minus: 1 %}{% endif %}
 
   {% assign current_plus_one = current | plus: 1 %}
@@ -28,7 +30,7 @@
   {% if right_mid > total_minus_end_size %}{% assign right_mid = right_mid | minus: end_size %}{% endif %}
 
   {% assign space_html = '<span class="space">&hellip;</span>' %}
-
+  {%- comment -%} 展示 {%- endcomment -%}
   {% for i in (1..left_end) %}
     {% assign href = site.paginate_path | relative_url | replace: '//', '/' | replace: ':num', i %}
     {% if i == 1 %}
