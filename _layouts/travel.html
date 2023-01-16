@@ -1,0 +1,72 @@
+---
+layout: layout
+---
+
+{% assign __ = site.data.languages[site.language] %}
+{%- comment -%} 取出travel collections中全部文件内容 {%- endcomment -%}
+<section id="posts" class="posts-expand">
+    {% for travel in site.posts %}
+        {%- comment -%} 筛选出为travel的文章 {%- endcomment -%}
+        {% if travel.type == "travel" %}
+            {% assign travel.photo = "<img src='" | append: travel.photo |  append: "' alt={{travel.title}} class='travel_photo'/>" %}    
+            
+            <h1 class="post-title">
+                <a class="post-title-link" href="{{travel.url | relative_url}}"> {{travel.title | default: __.post.untitled}} </a>
+            </h1>
+
+            {%- comment -%} 标题下面显示旅游信息 {%- endcomment -%}
+            <div class="post-meta">
+            {%- comment -%} 旅游时间 {%- endcomment -%}
+                <span class="post-time">
+                    {%- comment -%} 如果写了开始时间 {%- endcomment -%}
+                    {% if travel.start_time %}
+                        <span class="post-meta-item-icon">
+                            <i class="fa fa-plane-departure"></i>
+                        </span>
+                        <span class="post-meta-item-text">
+                            {{ __.travel.start }}
+                        </span>
+                        <time title="{{ __.tarvel.start }}" itemprop="dateCreated datePublished" datetime="{{ travel.start_time | date_to_xmlschema }}">
+                            {{ travel.start_time | date: site.date_format }}
+                        </time>
+                    {% endif %}
+
+                    {% if travel.start_time and travel.end_time %}
+                        <span class="post-meta-divider">|</span>
+                    {% endif %}
+
+                    {%- comment -%} 如果写了结束时间 {%- endcomment -%}
+                    {% if travel.end_time %}
+                        <span class="post-meta-item-icon">
+                            <i class="fa fa-plane-arrival"></i>
+                        </span>
+                        <span class="post-meta-item-text">
+                            {{ __.travel.end }}
+                        </span>
+                        <time title="{{ __.travel.end }}" itemprop="dateCreated datePublished" datetime="{{ travel.end_time | date_to_xmlschema }}">
+                            {{ travel.end_time | date: site.date_format }}
+                        </time>
+                    {% endif %}
+                </span>
+
+                {% if travel.destination and travel.end_time %}
+                    <span class="post-meta-divider">|</span>
+                {% endif %}
+                
+                {%- comment -%} 如果写了旅行地点 {%- endcomment -%}
+                {% if travel.destination %}
+                    <span class="post-meta-item-icon">
+                        <i class="fa fa-rabbit-running"></i>
+                    </span>
+
+                    <span class="post-meta-item-text">
+                        {{ __.travel.des }}:{{ travel.destination }}
+                    </span>
+                {% endif %}
+                
+            </div>
+
+           <a href="{{travel.url | relative_url}}"> {{travel.photo | first | default: '<img src="\assets\images\bg-i3.JPG" alt="default photo" class="travel_photo" />' }} </a>
+        {% endif %}
+    {% endfor %}
+<section>

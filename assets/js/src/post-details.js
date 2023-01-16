@@ -119,6 +119,9 @@ $(document).ready(function () {
   });
 
   $('.post-toc a').on('click', function (e) {
+    if(this.getAttribute('name')=='travel'){
+      return;
+    }
     e.preventDefault();
     var targetSelector = NexT.utils.escapeSelector(decodeURIComponent(this.getAttribute('href')));
     var offset = $(targetSelector).offset().top;

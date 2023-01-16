@@ -4,11 +4,13 @@ NexT.utils = NexT.$u = {
   /**
    * Wrap images with fancybox support.
    */
+  // 加入去排除我们的旅游图片
   wrapImageWithFancyBox: function () {
     $('.content img')
       .not('[hidden]')
       .not('.group-picture img, .post-gallery img')
       .not('.emoji')
+      .not('.travel_photo')
       .each(function () {
         var $image = $(this);
         var imageTitle = $image.attr('title');

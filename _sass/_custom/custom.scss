@@ -1,1 +1,7 @@
 // Custom styles.
+.content a img.travel_photo{
+    transition:transform 1s;
+    &:hover { 
+        transform:scale(1.2,1.2);
+    }
+}
