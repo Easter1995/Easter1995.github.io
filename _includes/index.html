@@ -5,11 +5,41 @@
 {% endif %}
 
 <section id="posts" class="posts-expand">
-  {% for post in posts %}
-  {%- comment -%} 标明是一个index首页内容 {%- endcomment -%}
-    {% assign is_index = true %}
-    {% include _macro/post.html %}
-  {% endfor %}
+  {% if paginator.page == 1 %}
+    {% assign flag = 1 %}
+  {% else %}
+    {% assign flag = 0 %}
+  {% endif %}
+
+  {%- comment -%} 如果当前页是第一页 {%- endcomment -%}
+  {% if flag == 1 %}
+    {%- comment -%} 遍历每一篇文章 {%- endcomment -%}
+    {% for post in site.posts %}
+      {% assign post_class = 'post post-type-' | append: post.type | default: 'normal' %}
+      {% assign post_class = post_class | append: ' ' | append: post_extra_class | default: '' %}
+      {% assign is_index = true %}
+      {% if post.sticky and is_index %}
+        {% assign post_class = post_class | append: ' ' | append: 'post-sticky' %}
+        {% include _macro/post.html %}
+      {% endif %}
+    {% endfor %}
+
+    {% for post in posts %}
+      {% unless post.sticky %}
+        {% include _macro/post.html %}
+      {% endunless %}
+    {% endfor %}
+  
+  {% else %}
+    {% for post in posts %}
+      {% assign post_class = 'post post-type-' | append: post.type | default: 'normal' %}
+      {% assign post_class = post_class | append: ' ' | append: post_extra_class | default: '' %}
+      {% assign is_index = true %}
+      {% unless post.sticky %}
+        {% include _macro/post.html %}
+      {% endunless %}
+    {% endfor %}
+  {% endif %}
 </section>
 
 {% include _partials/pagination.html %}

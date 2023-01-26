@@ -4,12 +4,6 @@
     {% assign headlessPost = true %}
   {% endif %}
 
-  {% assign post_class = 'post post-type-' | append: post.type | default: 'normal' %}
-  {% assign post_class = post_class | append: ' ' | append: post_extra_class | default: '' %}
-  {% if post.sticky and is_index %}
-    {% assign post_class = post_class | append: ' ' | append: 'post-sticky' %}
-  {% endif %}
-
   <article class="{{ post_class }}" itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="{{ post.url | absolute_url }}">
 
