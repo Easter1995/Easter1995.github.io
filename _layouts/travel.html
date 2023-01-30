@@ -8,7 +8,7 @@ layout: layout
     {% for travel in site.posts %}
         {%- comment -%} 筛选出为travel的文章 {%- endcomment -%}
         {% if travel.type == "travel" %}
-            {% assign travel.photo = "<img src='" | append: travel.photo |  append: "' alt={{travel.title}} class='travel_photo'/>" %}    
+            {% assign photo = "<img src='" | append: travel.photo |  append: "' alt={{travel.title}} class='travel_photo'/>" %}    
             
             <h1 class="post-title">
                 <a class="post-title-link" href="{{travel.url | relative_url}}"> {{travel.title | default: __.post.untitled}} </a>
@@ -66,7 +66,7 @@ layout: layout
                 
             </div>
 
-           <a href="{{travel.url | relative_url}}"> {{travel.photo | first | default: '<img src="\assets\images\bg-i3.JPG" alt="default photo" class="travel_photo" />' }} </a>
+           <a href="{{travel.url | relative_url}}"> {{photo | default: '<img src="\assets\images\bg-i3.JPG" alt="default photo" class="travel_photo" />' }} </a>
         {% endif %}
     {% endfor %}
 <section>

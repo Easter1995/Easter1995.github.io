@@ -11,7 +11,7 @@ layout: layout
     
         <li>
             {%- comment -%} 姓名 {%- endcomment -%}
-            <h1> {{ friend.name }}: </h1> </ br>
+            <h1 class="friend-name"> {{ friend.name }}: </h1> </ br>
             {%- comment -%} 链接 {%- endcomment -%}
             <ul class="friend-links">
                 {% for link in friend.links %}
