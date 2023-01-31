@@ -37,10 +37,10 @@
 }
 .post-meta-item-text {
   @include tablet() {
-    display: none;
+    display: inline;
   }
   @include mobile() {
-    display: none;
+    display: inline;
   }
 }
 
