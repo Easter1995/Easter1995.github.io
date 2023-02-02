@@ -231,8 +231,8 @@ pre .meta     { color: $highlight-purple; }
 
 pre {
 
-  .c, .cm, .cp, .c1, .cs { color: $highlight-comment; }
-
+  .c, .cm, .cp, .cs { color: $highlight-comment; }
+  .c1 {color: #e29e9e;}
   .nv, .vc, .vg, .vi,
   .na,
   .nt,
