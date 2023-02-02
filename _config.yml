@@ -379,7 +379,7 @@ custom_logo:
 # gruvbox.light, igorpro, magritte, molokai, monokai, monokai.sublime, 
 # pastie, thankful_eyes, tulip
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: night eighties
+highlight_theme: night
 # 是否使用原来模板的主题
 highlight_old: true
 
