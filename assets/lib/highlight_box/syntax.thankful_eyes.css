@@ -6,13 +6,14 @@
 }
 .highlight , .code{
   color: #a3e4ff;
-  background-color: #2d2d2d;
+  background-color: #171717;
   margin: 0em;
 }
 .highlight .gl,.highlight .gutter {
-  color: #dee5e7;
-  background-color: #4e5d62;
+  color: #a3e3ffb9;
+  background-color: #171717dd;
   width: 1.5em;
+  font-size: 1.1em;
   text-align: right;
 }
 .highlight .gp {
@@ -20,7 +21,7 @@
   font-weight: bold;
 }
 .highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
-  color: #6c8b9f;
+  color: #bb682a;
   font-style: italic;
 }
 .highlight .cp {
