@@ -232,7 +232,11 @@ pre .meta     { color: $highlight-purple; }
 pre {
 
   .c, .cm, .cp, .cs { color: $highlight-comment; }
-  .c1 {color: #e29e9e;}
+  .c1 
+  {
+    color: #e29e9e;
+    font-style: italic;
+  }
   .nv, .vc, .vg, .vi,
   .na,
   .nt,
