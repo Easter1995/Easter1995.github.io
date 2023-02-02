@@ -379,9 +379,9 @@ custom_logo:
 # gruvbox.light, igorpro, magritte, molokai, monokai, monokai.sublime, 
 # pastie, thankful_eyes, tulip
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
+highlight_theme: thankful_eyes
 # 是否使用原来模板的主题
-highlight_old: true
+highlight_old: false
 
 # ---------------------------------------------------------------
 # Third Party Services Settings
