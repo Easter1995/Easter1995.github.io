@@ -26,7 +26,7 @@ $highlight_theme : jekyll-config("highlight_theme");
   ) !global;
 }
 
-@if $highlight_theme == "night eighties" {
+@else if $highlight_theme == "night eighties" {
   $highlight-background   : #2d2d2d !global;
   $highlight-current-line : #393939 !global;
   $highlight-selection    : #515151 !global;
@@ -45,7 +45,7 @@ $highlight_theme : jekyll-config("highlight_theme");
   ) !global;
 }
 
-@if $highlight_theme == "night blue" {
+@else if $highlight_theme == "night blue" {
   $highlight-background   : #002451 !global;
   $highlight-current-line : #00346e !global;
   $highlight-selection    : #003f8e !global;
@@ -63,8 +63,7 @@ $highlight_theme : jekyll-config("highlight_theme");
     bg-color: scale-color($highlight-background, $lightness: -60%)
   ) !global;
 }
-//  $highlight_theme == "night bright" or write wrong
-@if $highlight_theme == "night bright" {
+@else if $highlight_theme == "night bright" {
   $highlight-background   : #000000 !global;
   $highlight-current-line : #2a2a2a !global;
   $highlight-selection    : #424242 !global;
