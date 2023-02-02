@@ -56,7 +56,7 @@
                 {{ post.title | default: __.post.untitled }}
               </a>
               <!-- 我可能没有标题，我进来了 -->
-              <h1> {{pots.title}} </h1>
+              <h1> {{post.title}} </h1>
               {%- comment -%} 如果是非首页index内容，则只会进行标题显示 {%- endcomment -%}
             {% else %}{{ post.title }}{% endif %}
 
