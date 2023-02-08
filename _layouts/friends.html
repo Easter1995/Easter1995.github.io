@@ -4,28 +4,73 @@ layout: layout
 
 {% assign __ = site.data.languages[site.language] %}
 
+{%- comment -%} 自己的链接 {%- endcomment -%}
+<section id="author-links" class="author-link">
+    <ul class="author-links">
+        {% for author in site.friends %}
+            {% if author.me %}
+                <h1 class="author-name"><i class="fa fa-paw"></i> {{ author.name }}</h1>
+                    {% for link in author.links %}
+                        <li>
+                            <span class="author-link-type">{{ link[0] }}:</span>
+                            <span class="author-link-url">
+                                <a href="{{ link[1] }}" alt="link[0]">{{ link[1] }}</a>
+                            </span>
+                        </li>
+                    {% endfor %}
+                    <li class="wechat">
+                        wechat_QR_code: {{ author.wechat_QR_code }}
+                    </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</section>
+
 {%- comment -%} 其他人的链接 {%- endcomment -%}
 <section id="links" class="friend-link">
-<ul>
-    {% for friend in site.friends %}
-    
-        <li>
-            {%- comment -%} 姓名 {%- endcomment -%}
-            <h1 class="friend-name"> {{ friend.name }}: </h1> </ br>
-            {%- comment -%} 链接 {%- endcomment -%}
-            <ul class="friend-links">
-                {% for link in friend.links %}
+{%- comment -%} 星标好友置顶 {%- endcomment -%}
+    <ul>
+        {% for friend in site.friends %} 
+            {% if friend.star %}
                 <li>
-                    <span class="friend-link-type">
-                        {{ link[0] }}:
-                    </span>
-                    <span class="friend-link-url">
-                        <a href="{{ link[1] }}" alt="{{ link[0] }}">{{ link[1] }}</a>
-                    </span>
+                    <h1 class="friend-name-star"><i class="fa fa-sparkles"></i> {{ friend.name }}:</h1> </ br>
+                    <ul class="friend-links-star">
+                        {% for link in friend.links %}
+                        <li>
+                            <span class="friend-link-type">
+                                {{ link[0] }}:
+                            </span>
+                            <span class="friend-link-url">
+                                <a href="{{ link[1] }}">{{ link[1] }}</a>
+                            </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </li>
-                {% endfor %}
-            </ul>
-        </li>
-    {% endfor %}
-</ul>
+            {% endif %}
+        {% endfor %}
+        {% for friend in site.friends %}
+            {% unless friend.star %}
+            {% unless friend.me %}
+                <li>
+                    {%- comment -%} 姓名 {%- endcomment -%}
+                    <h1 class="friend-name"> {{ friend.name }}: </h1> </ br>
+                    {%- comment -%} 链接 {%- endcomment -%}
+                    <ul class="friend-links">
+                        {% for link in friend.links %}
+                        <li>
+                            <span class="friend-link-type">
+                                {{ link[0] }}:
+                            </span>
+                            <span class="friend-link-url">
+                                <a href="{{ link[1] }}" alt="{{ link[0] }}">{{ link[1] }}</a>
+                            </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endunless %}
+            {% endunless %}
+        {% endfor %}
+    </ul>
 </section>
