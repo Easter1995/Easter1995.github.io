@@ -16,6 +16,17 @@
   background: white;
   box-shadow: $box-shadow-inner;
   border-radius: $border-radius;
+  animation-duration: 2s;
+  animation-name: sliden;
+
+  @keyframes sliden {
+    from {
+      margin-top: 100%;
+    }
+    to {
+      margin-top: 32px;
+    }
+  }
 
   @include desktop-large() {width: 250px;}
   @include desktop() {width: 240px;}

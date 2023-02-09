@@ -45,6 +45,11 @@ layout: layout
                             </span>
                         </li>
                         {% endfor %}
+                        {% if friend.wechat_QR_code %}
+                            <li class="wechat">
+                                wechat_QR_code: {{ friend.wechat_QR_code }}
+                            </li>
+                        {% endif %}
                     </ul>
                 </li>
             {% endif %}
@@ -67,6 +72,11 @@ layout: layout
                             </span>
                         </li>
                         {% endfor %}
+                        {% if friend.wechat_QR_code %}
+                            <li class="wechat">
+                                wechat_QR_code: {{ friend.wechat_QR_code }}
+                            </li>
+                        {% endif %}
                     </ul>
                 </li>
             {% endunless %}
