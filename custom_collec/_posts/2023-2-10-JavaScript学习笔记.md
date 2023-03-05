@@ -36,6 +36,7 @@ JavaScript 把页面的标题改成了“Hello world!” 。首先用 `querySele
 
 ```javascript
 let myVariable;
+var myVariable;
 ```
 
 **语句末尾分号**： 行末的分号表示当前语句结束，不过只有在单行内需要分割多条语句时，这个分号才是必须的。然而，一些人认为每条语句末尾加分号是一种好的风格。
@@ -80,6 +81,22 @@ myName = 'Bob';
 - 让变量名直观，它们描述了所包含的数据。不要只使用单一的字母/数字，或者长句。
 - 变量名大小写敏感——因此`myage`与`myAge`是 2 个不同的变量。
 - 最后也是最重要的一点—— 你应当避免使用 JavaScript 的保留字给变量命名。保留字，即是组成 JavaScript 的实际语法的单词！因此诸如 `var`、`function`、`let` 和 `for` 等，都不能被作为变量名使用。浏览器将把它们识别为不同的代码项，因此你将得到错误。
+
+### 常量
+
+由于`var`和`let`申明的是变量，如果要申明一个常量，在ES6之前是不行的，我们通常用全部大写的变量来表示“这是一个常量，不要修改它的值”：
+
+```javascript
+var PI = 3.14;
+```
+
+ES6标准引入了新的关键字`const`来定义常量，`const`与`let`都具有块级作用域：
+
+```javascript
+const PI = 3.14;
+PI = 3; // 某些浏览器不报错，但是无效果！
+PI; // 3.14
+```
 
 ### 运算符
 
@@ -127,6 +144,193 @@ function multiply(num1, num2)//函数名（参数）
 
 在之前的例子中的`document.querySelector` 和 `alert` 是浏览器内置的函数，随时可用。
 
+### **匿名函数**
+
+通常将匿名函数与事件处理程序一起使用，例如，如果单击相关按钮，以下操作将在函数内运行代码：
+
+```javascript
+var myButton = document.querySelector('button');
+
+myButton.onclick = function() {
+  alert('hello');
+}
+```
+
+### **你还可以将匿名函数分配为变量的值**
+
+例如：
+
+```javascript
+var myGreeting = function() {
+  alert('hello');
+}
+```
+
+现在可以使用以下方式调用此函数：
+
+```javascript
+myGreeting();
+```
+
+## 方法
+
+在一个**对象**中绑定函数，称为这个对象的**方法**。
+
+在JavaScript中，对象的定义是这样的：
+
+```javascript
+var xiaoming = {
+    name: '小明',
+    birth: 1990
+};
+```
+
+但是，如果我们给`xiaoming`绑定一个函数，就可以做更多的事情。比如，写个`age()`方法，返回`xiaoming`的年龄：
+
+```javascript
+var xiaoming = {
+    name: '小明',
+    birth: 1990,
+    age: function () {
+        var y = new Date().getFullYear();
+        return y - this.birth;
+    }
+};
+
+xiaoming.age; // function xiaoming.age()
+xiaoming.age(); // 今年调用是25,明年调用就变成26了
+```
+
+在一个方法内部，`this`是一个特殊变量，它始终指向当前对象，也就是`xiaoming`这个变量。所以，`this.birth`可以拿到`xiaoming`的`birth`属性。
+
+让我们拆开写：
+
+```javascript
+function getAge() {
+    var y = new Date().getFullYear();
+    return y - this.birth;
+}
+
+var xiaoming = {
+    name: '小明',
+    birth: 1990,
+    age: getAge
+};
+
+xiaoming.age(); // 25, 正常结果
+getAge(); // NaN
+```
+
+单独调用函数`getAge()`怎么返回了`NaN`？*请注意*，我们已经进入到了JavaScript的一个大坑里。
+
+JavaScript的函数内部如果调用了`this`，那么这个`this`到底指向谁？
+
+答案是，视情况而定！
+
+如果以对象的方法形式调用，比如`xiaoming.age()`，该函数的`this`指向被调用的对象，也就是`xiaoming`，这是符合我们预期的。
+
+如果单独调用函数，比如`getAge()`，此时，该函数的`this`指向全局对象，也就是`window`！！
+
+但是！！如果这么写：
+
+```javascript
+var fn = xiaoming.age; // 先拿到xiaoming的age函数
+fn(); // NaN
+```
+
+也是不行的！要保证`this`指向正确，必须用`obj.xxx()`的形式调用！
+
+## 高阶函数
+
+一个函数接收另一个函数作为参数，这种函数就称之为高阶函数。
+
+一个最简单的高阶函数：
+
+```javascript
+function add(x, y, f) {
+    return f(x) + f(y);
+}
+```
+
+当我们调用`add(-5, 6, Math.abs)`时，参数`x`，`y`和`f`分别接收`-5`，`6`和函数`Math.abs`，根据函数定义，我们可以推导计算过程为：
+
+```javascript
+x = -5;
+y = 6;
+f = Math.abs;
+f(x) + f(y) ==> Math.abs(-5) + Math.abs(6) ==> 11;
+return 11;
+```
+
+### filter
+
+`filter()`用于把 `array`的某些元素过滤掉，然后返回剩下的元素。
+
+例如，在一个`Array`中，删掉偶数，只保留 `奇数`，可以这么写：
+
+```javascript
+var arr = [1, 2, 4, 5, 6, 9, 10, 15];
+var r = arr.filter(function (x) {
+    return x % 2 !== 0;
+});
+r; // [1, 5, 9, 15]
+```
+
+### sort排序
+
+通常规定，对于两个元素`x`和`y`，如果认为`x < y`，则返回`-1`，如果认为`x == y`，则返回`0`，如果认为`x > y`，则返回`1`，这样，排序算法就不用关心具体的比较过程，而是根据比较结果直接排序。
+
+JavaScript的`Array`的`sort()`方法就是用于排序的，但是排序结果可能让你大吃一惊：
+
+```javascript
+// 看上去正常的结果:
+['Google', 'Apple', 'Microsoft'].sort(); // ['Apple', 'Google', 'Microsoft'];
+
+// apple排在了最后:
+['Google', 'apple', 'Microsoft'].sort(); // ['Google', 'Microsoft", 'apple']
+//第二个排序把apple排在了最后，是因为字符串根据ASCII码进行排序，而小写字母a的ASCII码在大写字母之后。
+
+// 无法理解的结果:
+[10, 20, 1, 2].sort(); // [1, 10, 2, 20]
+//这是因为Array的sort()方法默认把所有元素先转换为String再排序，结果'10'排在了'2'的前面，因为字符'1'比字符'2'的ASCII码小。
+```
+
+幸运的是，`sort()`方法也是一个高阶函数，它还可以接收一个比较函数来实现**自定义的排序**。
+
+**数字排序**
+
+```javascript
+arr.sort(function (x, y) {
+    if (x < y) {
+        return -1;
+    }
+    if (x > y) {
+        return 1;
+    }
+    return 0;
+});
+console.log(arr); // [1, 2, 10, 20]
+```
+
+**字母排序**
+
+```javascript
+var arr = ['Google', 'apple', 'Microsoft'];
+arr.sort(function (s1, s2) {
+    x1 = s1.toUpperCase();//先全部都转换成大写
+    x2 = s2.toUpperCase();
+    if (x1 < x2) {
+        return -1;
+    }
+    if (x1 > x2) {
+        return 1;
+    }
+    return 0;
+}); // ['apple', 'Google', 'Microsoft']
+```
+
+
+
 ## 事件
 
 它可以捕捉浏览器操作并运行一些代码做为响应。最简单的事件是[点击事件](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/click_event)，鼠标的点击操作会触发该事件。
@@ -147,11 +351,99 @@ document.querySelector('html').addEventListener('click', () => {
 });
 ```
 
+# 条件语句
+
+```javascript
+var shoppingDone = false;
+
+if (shoppingDone === true) {
+  var childsAllowance = 10;
+} else {
+  var childsAllowance = 5;
+}
+//跟C语言的条件语句没什么两样
+```
+
+# 循环语句
+
+一段循环通常需要一个或多个条件：
+
+- **一个开始条件，**它被初始化为一个特定的值 - 这是循环的起点 ("开始：我没有食物”，上面）。
+- **一个结束条件，**这是循环停止的标准 - 通常计数器达到一定值。以上所说的“我有足够的食物”吗？假设他需要 10 份食物来养活他的家人。
+- **一个迭代器，**这通常在每个连续循环上递增少量的计数器，直到达到退出条件。我们以前没有明确说明，但是我们可以考虑一下农民能够每小时收集 2 份食物。每小时后，他收集的食物量增加了两倍，他检查他是否有足够的食物。如果他已经达到 10 分（退出条件），他可以停止收集回家。
+
+在 伪代码 中，这看起来就像下面这样：
+
+```javascript
+loop(food = 0; foodNeeded = 10) {
+  if (food = foodNeeded) {
+    exit loop;
+    // 我们有足够的食物了，回家吧。
+  } else {
+    food += 2; // 花一个小时多收集两个食物。
+    // 循环将会继续执行。
+  }
+}
+
+//真实代码跟C语言相同
+```
+
+# JS变量的作用域
+
+## 全局作用域
+
+不在任何函数内定义的变量就具有全局作用域。实际上，JavaScript默认有一个全局对象`window`，全局作用域的变量实际上被绑定到`window`的一个属性：
+
+```javascript
+var course = 'Learn JavaScript';
+alert(course); // 'Learn JavaScript'
+alert(window.course); // 'Learn JavaScript'
+```
+
+因此，直接访问全局变量`course`和访问`window.course`是完全一样的。
+
+你可能猜到了，由于函数定义有两种方式，以变量方式`var foo = function () {}`定义的函数实际上也是一个全局变量，因此，顶层函数的定义也被视为一个全局变量，并绑定到`window`对象：
+
+```javascript
+function foo() {
+    alert('foo');
+}
+foo(); // 直接调用foo()
+window.foo(); // 通过window.foo()调用
+```
+
+## 名字空间
+
+全局变量会绑定到`window`上，不同的JavaScript文件如果使用了相同的全局变量，或者定义了相同名字的顶层函数，都会造成命名冲突，并且很难被发现。
+
+减少冲突的一个方法是把自己的所有变量和函数全部绑定到一个全局变量中。例如：
+
+```javascript
+// 唯一的全局变量MYAPP:
+var MYAPP = {};
+
+// 其他变量:
+MYAPP.name = 'myapp';
+MYAPP.version = 1.0;
+
+// 其他函数:
+MYAPP.foo = function () {
+    return 'foo';
+};
+```
+
+把自己的代码全部放入唯一的名字空间`MYAPP`中，会大大减少全局变量冲突的可能。
+
+许多著名的JavaScript库都是这么干的：jQuery，YUI，underscore等等。
+
 # 想要尝试一下JS吗
-<script src="\assets\js\src\welcome.js" defer></script>
+
+## 输入你的姓名
+
+<script src="\assets\js\src\inputName.js" defer></script>
 <input type="button" onclick="setName()" value="click me~" />
 
-## 代码
+### 代码
 
 HTML部分：
 
