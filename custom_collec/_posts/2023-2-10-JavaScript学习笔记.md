@@ -329,7 +329,144 @@ arr.sort(function (s1, s2) {
 }); // ['apple', 'Google', 'Microsoft']
 ```
 
+### Array
 
+**every**
+
+`every()`方法可以判断数组的所有元素是否满足测试条件。
+
+```javascript
+var arr = ['Apple', 'pear', 'orange'];
+console.log(arr.every(function (s) {
+    return s.length > 0;
+})); // true, 因为每个元素都满足s.length>0
+
+console.log(arr.every(function (s) {
+    return s.toLowerCase() === s;
+})); // false, 因为不是每个元素都全部是小写
+```
+
+**find**
+
+`find()`方法用于查找符合条件的第一个元素，如果找到了，返回这个元素，否则，返回`undefined`
+
+```javascript
+var arr = ['Apple', 'pear', 'orange'];
+console.log(arr.find(function (s) {
+    return s.toLowerCase() === s;
+})); // 'pear', 因为pear全部是小写
+
+console.log(arr.find(function (s) {
+    return s.toUpperCase() === s;
+})); // undefined, 因为没有全部是大写的元素
+```
+
+## 闭包
+
+**函数作为返回值**
+
+```javascript
+function lazy_sum(arr) {
+    var sum = function () {
+        return arr.reduce(function (x, y) {
+            return x + y;
+        });
+    }
+    return sum;
+}
+```
+
+当我们调用`lazy_sum()`时，返回的并不是求和结果，而是求和函数：
+
+```javascript
+var f = lazy_sum([1, 2, 3, 4, 5]); // function sum()
+```
+
+调用函数`f`时，才真正计算求和的结果：
+
+```javascript
+f(); // 15
+```
+
+在这个例子中，我们在函数`lazy_sum`中又定义了函数`sum`，并且，内部函数`sum`可以引用外部函数`lazy_sum`的参数和局部变量，当`lazy_sum`返回函数`sum`时，相关参数和变量都保存在返回的函数中，这种称为“闭包（Closure）”的程序结构拥有极大的威力。
+
+请再注意一点，当我们调用`lazy_sum()`时，每次调用都会返回一个新的函数，即使传入相同的参数：
+
+```javascript
+var f1 = lazy_sum([1, 2, 3, 4, 5]);
+var f2 = lazy_sum([1, 2, 3, 4, 5]);
+f1 === f2; // false
+```
+
+`f1()`和`f2()`的调用结果互不影响。
+
+**闭包**
+
+我们用JavaScript创建一个计数器
+
+```javascript
+function create_counter(initial) {
+    var x = initial || 0;
+    return {
+        inc: function () {
+            x += 1;
+            return x;
+        }
+    }
+}
+var c1 = create_counter();
+c1.inc(); // 1
+c1.inc(); // 2
+c1.inc(); // 3
+
+var c2 = create_counter(10);
+c2.inc(); // 11
+c2.inc(); // 12
+c2.inc(); // 13
+```
+
+在返回的对象中，实现了一个闭包，该闭包携带了局部变量`x`，并且，从外部代码根本无法访问到变量`x`。换句话说，闭包就是携带状态的函数，并且它的状态可以完全对外隐藏起来。
+
+## 箭头函数
+
+ES6标准新增了一种新的函数：Arrow Function（箭头函数）。
+
+为什么叫Arrow Function？因为它的定义用的就是一个箭头：
+
+```javascript
+x => x * x
+```
+
+上面的箭头函数相当于：
+
+```javascript
+function (x) {
+    return x * x;
+}
+```
+
+箭头函数相当于匿名函数，并且简化了函数定义。箭头函数有两种格式，一种像上面的，只包含一个表达式，连`{ ... }`和`return`都省略掉了。还有一种可以包含多条语句，这时候就不能省略`{ ... }`和`return`：
+
+```javascript
+x => {
+    if (x > 0) {
+        return x * x;
+    }
+    else {
+        return - x * x;
+    }
+}
+```
+
+如果参数不是一个，就需要用括号`()`括起来
+
+```javascript
+// 两个参数:
+(x, y) => x * x + y * y
+
+// 无参数:
+() => 3.14
+```
 
 ## 事件
 
@@ -435,6 +572,109 @@ MYAPP.foo = function () {
 把自己的代码全部放入唯一的名字空间`MYAPP`中，会大大减少全局变量冲突的可能。
 
 许多著名的JavaScript库都是这么干的：jQuery，YUI，underscore等等。
+
+# 浏览器
+
+## 浏览器对象
+
+JavaScript可以获取浏览器提供的很多对象，并进行操作
+
+### window
+
+`window`对象有`innerWidth`和`innerHeight`属性，可以获取浏览器窗口的内部宽度和高度。内部宽高是指除去菜单栏、工具栏、边框等占位元素后，用于显示网页的净宽高。
+
+```javascript
+console.log('window inner size: ' + window.innerWidth + ' x ' + window.innerHeight);
+```
+
+### screen
+
+`screen`对象表示屏幕的信息，常用的属性有：
+
+- screen.width：屏幕宽度，以像素为单位；
+- screen.height：屏幕高度，以像素为单位；
+- screen.colorDepth：返回颜色位数，如8、16、24。
+
+## 操作DOM
+
+### DOM
+
+输入的网址在**通过DNS解析后得到服务器地址**
+浏览器向服务器发起http请求，经过**TCP/IP三次握手确认链接**后，服务器将需要的代码发回给浏览器。
+浏览器接收到代码后进行解析，经过**三大步骤**：
+**DOM构造、布局以及绘制页面**，最终展现为人人都能看懂的网页。
+
+浏览器首先将收到的html代码，**通过html解析器解析构建为一颗DOM树
+而DOM树就像是一颗倒长着的大树，之间都有一定的关联
+它们关系可能有父子、有兄弟，我们可以顺着这颗树做出许多操作。
+接着将接收到的css代码**，通过css解析器构建出样式表规则将这些规则分别放到对应的DOM树节点上，得到一颗带有样式属性的DOM树
+
+### 操作
+
+- 更新：更新该DOM节点的内容，相当于更新了该DOM节点表示的HTML的内容；
+- 遍历：遍历该DOM节点下的子节点，以便进行进一步操作；
+- 添加：在该DOM节点下新增一个子节点，相当于动态增加了一个HTML节点；
+- 删除：将该节点从HTML中删除，相当于删掉了该DOM节点的内容以及它包含的所有子节点。
+
+在操作一个DOM节点前，我们需要通过各种方式先拿到这个DOM节点。最常用的方法是`document.getElementById()`和`document.getElementsByTagName()`，以及CSS选择器`document.getElementsByClassName()`。
+
+由于ID在HTML文档中是唯一的，所以`document.getElementById()`可以直接定位唯一的一个DOM节点。`document.getElementsByTagName()`和`document.getElementsByClassName()`总是返回一组DOM节点。要精确地选择DOM，可以先定位父节点，再从父节点开始选择，以缩小范围。
+
+```javascript
+// 返回ID为'test'的节点：
+var test = document.getElementById('test');
+
+// 先定位ID为'test-table'的节点，再返回其内部所有tr节点：
+var trs = document.getElementById('test-table').getElementsByTagName('tr');
+
+// 先定位ID为'test-div'的节点，再返回其内部所有class包含red的节点：
+var reds = document.getElementById('test-div').getElementsByClassName('red');
+
+// 获取节点test下的所有直属子节点:
+var cs = test.children;
+
+// 获取类名为test的第一个节点
+var firstTest = document.getElementsById('test')[0];
+
+// 获取节点test下第一个、最后一个子节点：
+var first = test.firstElementChild;
+var last = test.lastElementChild;
+```
+
+第二种方法是使用`querySelector()`和`querySelectorAll()`，需要了解selector语法，然后使用条件来获取节点，更加方便：
+
+```javascript
+// 通过querySelector获取ID为q1的节点：
+var q1 = document.querySelector('#q1');
+
+// 通过querySelectorAll获取q1节点内的符合条件的所有节点：
+var ps = q1.querySelectorAll('div.highlighted > p');
+```
+
+## 操作表单
+
+表单的输入框、下拉框等可以接收用户输入，所以用JavaScript来操作表单，可以获得用户输入的内容，或者对一个输入框设置新的内容。
+
+HTML表单的输入控件主要有以下几种：
+
+- 文本框，对应的`<input type="text">`，用于输入文本；
+- 口令框，对应的`<input type="password">`，用于输入口令；
+- 单选框，对应的`<input type="radio">`，用于选择一项；
+- 复选框，对应的`<input type="checkbox">`，用于选择多项；
+- 下拉框，对应的`<input type="select">`，用于选择一项；
+- 隐藏文本，对应的`<input type="hidden">`，用户不可见，但表单提交时会把隐藏文本发送到服务器。
+
+### 获取值
+
+如果我们获得了一个`<input>`节点的引用，就可以直接调用`value`获得对应的用户输入值：
+
+```javascript
+// <input type="text" id="email">
+var input = document.getElementById('email');
+input.value; // '用户输入的值'
+```
+
+
 
 # 想要尝试一下JS吗
 
